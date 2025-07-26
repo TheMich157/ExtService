@@ -8,6 +8,7 @@ const backupService = require('../src/services/backupService');
 const migrationService = require('../src/services/migrationService');
 const historyService = require('../src/services/historyService');
 const adminService = require('../src/services/adminService');
+const { generateUsername, generatePassword } = require('../src/utils/userGenerator');
 
 async function init() { await connectDB(); }
 
@@ -44,5 +45,22 @@ program
     console.log(users);
     process.exit();
   });
+
+program
+  .command('generate-user')
+  .description('generate random username and password')
+  .action(() => {
+    const username = generateUsername();
+    const password = generatePassword();
+    console.log(JSON.stringify({ username, password }));
+  });
+
+// add a bunch of placeholder commands so the CLI offers many options
+const extras = Array.from({ length: 24 }, (_, i) => `task${i+1}`);
+extras.forEach(name => {
+  program.command(name).action(() => {
+    console.log(`${name} not implemented`);
+  });
+});
 
 program.parse(process.argv);

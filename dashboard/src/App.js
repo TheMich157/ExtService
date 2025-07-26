@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
 
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
@@ -39,7 +40,8 @@ export default function App() {
   }
 
   return (
-    <div>
+    <div id="list">
+      <button onClick={() => { localStorage.removeItem('token'); setToken(''); }}>Logout</button>
       <h2>Users</h2>
       <ul>
         {users.map(u => (
