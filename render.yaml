@@ -3,7 +3,7 @@ services:
     name: roblox-backend
     env: docker
     plan: free
-    repo: https://github.com/example/roblox-backend
+    repo: https://github.com/TheMich157/ExtServiced
     dockerContext: .
     dockerfilePath: Dockerfile
     envVars:
