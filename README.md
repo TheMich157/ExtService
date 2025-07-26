@@ -19,7 +19,11 @@ Docker and docker-compose configurations are included for local development.
 node admin-cli/main.js create-admin <user> <pass>
 ```
 
-Additional commands such as `get`, `backup`, `migrate`, `history` and `users` are available. Run the script without arguments to see them all.
+Additional commands such as `get`, `backup`, `migrate`, `history`, `users` and the new `stats` command are available. Run the script without arguments to see them all.
+
+### Dashboard
+
+The included React dashboard acts as the landing page. After logging in you are presented with a modern table of user data.
 
 ### Roblox Example
 

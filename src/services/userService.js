@@ -16,4 +16,8 @@ async function listUsers() {
   return User.find().limit(100);
 }
 
-module.exports = { saveUser, loadUser, listUsers };
+async function countUsers() {
+  return User.countDocuments();
+}
+
+module.exports = { saveUser, loadUser, listUsers, countUsers };
