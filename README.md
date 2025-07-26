@@ -1,14 +1,54 @@
 # Roblox Backend Service
 
-This repository provides a basic backend for synchronizing Roblox player data across games using Node.js, Express and MongoDB. It contains placeholder implementations for a REST API, CLI utility and React dashboard.
+This repository provides a simple backend for synchronizing Roblox player data across games using Node.js, Express and MongoDB.  It exposes a REST API, a small command line utility and a very light React based dashboard.
 
 ## Development
 
-Copy `.env.example` to `.env` and adjust values. Then run:
+Copy `.env.example` to `.env` and adjust values.  After installing dependencies you can start the server with:
 
 ```bash
 npm install
 npm start
 ```
 
-Docker and docker-compose configurations are included.
+Docker and docker-compose configurations are included for local development.
+
+### CLI
+
+```
+node admin-cli/main.js create-admin <user> <pass>
+```
+
+Generate a random username and password:
+
+```
+node admin-cli/main.js generate-user
+```
+
+Additional commands such as `get`, `backup`, `migrate`, `history`, `users` and
+`generate-user` are available. Over two dozen extra placeholder commands are
+included so the CLI exposes more than thirty commands in total. Run the script
+without arguments to see them all.
+
+### Roblox Example
+
+Send player data from a Roblox game:
+
+```lua
+local HttpService = game:GetService("HttpService")
+HttpService:PostAsync(
+    "https://your-server/api/user/save",
+    HttpService:JSONEncode({userId = player.UserId, coins = 100}),
+    Enum.HttpContentType.ApplicationJson,
+    false,
+    { ["x-api-key"] = "your-api-key" }
+)
+```
+
+Load data back in another game:
+
+```lua
+local res = HttpService:GetAsync("https://your-server/api/user/load?userId=" .. player.UserId, false, { ["x-api-key"] = "your-api-key" })
+local data = HttpService:JSONDecode(res)
+print(data.coins)
+```
