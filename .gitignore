@@ -1,0 +1,7 @@
+node_modules
+.env
+.env.*
+*.log
+/dashboard/node_modules
+/admin-cli/node_modules
+
