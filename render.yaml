@@ -5,3 +5,13 @@ services:
     plan: free
     repo: https://github.com/example/roblox-backend
     dockerContext: .
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: MONGO_URI
+        value: mongodb://your-mongo:27017/roblox
+      - key: API_KEY
+        generateValue: true
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SCHEMA_VERSION
+        value: "1"

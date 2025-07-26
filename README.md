@@ -43,3 +43,15 @@ local res = HttpService:GetAsync("https://your-server/api/user/load?userId=" .. 
 local data = HttpService:JSONDecode(res)
 print(data.coins)
 ```
+
+### Deploying to Render
+
+The included `render.yaml` sets up a Docker-based web service. To deploy:
+
+1. Create a MongoDB instance on Render or provide an external connection string.
+2. In your Render dashboard, create a **New Web Service** from this repository.
+3. Ensure the environment variables defined in `render.yaml` are set with
+   appropriate values.
+4. Deploy and Render will build the Docker image and start the server.
+
+Your API will then be available at the URL provided by Render.
