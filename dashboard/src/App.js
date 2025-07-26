@@ -23,31 +23,46 @@ export default function App() {
 
   useEffect(() => {
     if (!token) return;
-    fetch('/api/admin/users', {
+    fetch('/api/user/list', {
       headers: { Authorization: 'Bearer ' + token }
     }).then(res => res.json()).then(setUsers).catch(() => {});
   }, [token]);
 
   if (!token) {
     return (
-      <form onSubmit={login}>
-        <h2>Admin Login</h2>
-        <input placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-        <button type="submit">Login</button>
-      </form>
+      <div className="login-wrapper">
+        <form className="login-box" onSubmit={login}>
+          <h2>Admin Login</h2>
+          <input placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
+          <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+          <button type="submit">Login</button>
+        </form>
+      </div>
     );
   }
 
   return (
-    <div id="list">
-      <button onClick={() => { localStorage.removeItem('token'); setToken(''); }}>Logout</button>
+    <div className="table-wrapper">
+      <button className="logout" onClick={() => { localStorage.removeItem('token'); setToken(''); }}>Logout</button>
       <h2>Users</h2>
-      <ul>
-        {users.map(u => (
-          <li key={u._id || u.userId}>{u.userId}</li>
-        ))}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Coins</th>
+            <th>Level</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(u => (
+            <tr key={u._id || u.userId}>
+              <td>{u.userId}</td>
+              <td>{u.coins}</td>
+              <td>{u.level}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

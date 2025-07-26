@@ -47,6 +47,16 @@ program
   });
 
 program
+  .command('stats')
+  .description('show number of users in the database')
+  .action(async () => {
+    await init();
+    const count = await userService.countUsers();
+    console.log({ users: count });
+    process.exit();
+  });
+
+program
   .command('generate-user')
   .description('generate random username and password')
   .action(() => {
