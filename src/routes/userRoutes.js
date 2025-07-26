@@ -1,30 +1,15 @@
-const express = require("express");
-const router = express.Router();
-const User = require("../models/UserData");
+const router = require('express').Router();
+const ctrl = require('../controllers/userController');
 
-// Save/update user data
-router.post("/save", async (req, res) => {
-  const { userId, stats } = req.body;
-  if (!userId || !stats) return res.status(400).json({ error: "Missing userId or stats" });
-  const now = new Date();
-  const prev = await User.findOne({ userId });
-  if (prev) {
-    prev.stats = stats;
-    prev.updatedAt = now;
-    await prev.save();
-  } else {
-    await User.create({ userId, stats, updatedAt: now });
-  }
-  res.json({ status: "saved" });
-});
-
-// Load user data
-router.get("/load", async (req, res) => {
-  const userId = req.query.userId;
-  if (!userId) return res.status(400).json({ error: "Missing userId" });
-  const u = await User.findOne({ userId });
-  if (!u) return res.status(404).json({ error: "Not found" });
-  res.json({ stats: u.stats, updatedAt: u.updatedAt });
-});
+router.post('/save', ctrl.save); // 1
+router.get('/load', ctrl.load); // 2
+router.get('/list', ctrl.list); // 3
+router.post('/update-field', (req,res)=>res.json({})); // 4
+router.post('/reset', (req,res)=>res.json({})); // 5
+router.get('/inventory', (req,res)=>res.json([])); // 6
+router.post('/merge', (req,res)=>res.json({})); // 7
+router.delete('/delete', (req,res)=>res.json({})); // 8
+router.post('/update-coins', (req,res)=>res.json({})); // 9
+router.post('/update-level', (req,res)=>res.json({})); //10
 
 module.exports = router;
