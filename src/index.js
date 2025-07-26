@@ -17,9 +17,8 @@ app.use(express.json());
 app.use(logger);
 
 app.use(rateLimit({ windowMs: 60 * 1000, max: 60 }));
-app.use(apiKeyCheck);
 
-app.use('/api', routes);
+app.use('/api', apiKeyCheck, routes);
 app.get('/', (req, res) => {
   res.send('Roblox Backend Service is running.');
 });
