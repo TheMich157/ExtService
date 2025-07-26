@@ -11,6 +11,7 @@ router.use('/service', require('./serviceRoutes')); //32-33
 // additional placeholders to reach 50 endpoints
 for(let i=34;i<=50;i++) {
   router.get(`/extra${i}`, (req,res)=>res.json({index:i}));
+  
 }
 
 module.exports = router;
