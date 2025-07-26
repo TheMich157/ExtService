@@ -6,7 +6,7 @@ const rateLimit = require('express-rate-limit');
 const connectDB = require('./config/db');
 const routes = require('./routes');
 const { apiKeyCheck } = require('./middleware/apiKey');
-const { ipWhitelist } = require('./middleware/ipWhitelist');
+// const { ipWhitelist } = require('./middleware/ipWhitelist');
 const logger = require('./utils/logger');
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(logger);
-app.use(ipWhitelist);
+// app.use(ipWhitelist);
 app.use(rateLimit({ windowMs: 60 * 1000, max: 60 }));
 app.use(apiKeyCheck);
 
