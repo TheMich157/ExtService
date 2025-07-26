@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: roblox-backend
+    name: ExtService
     env: docker
     plan: free
-    repo: https://github.com/TheMich157/ExtServiced
+    repo: https://github.com/TheMich157/ExtService
     dockerContext: .
     dockerfilePath: Dockerfile
     envVars:
