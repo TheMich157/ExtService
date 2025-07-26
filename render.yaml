@@ -16,7 +16,9 @@ services:
       - key: SCHEMA_VERSION
         value: "1"
       - key: ALLOWED_IPS
-        value: "195.91.2.148"
+        value: ""
+        value: "192.168.1.107,::1"
+
 
       
 
